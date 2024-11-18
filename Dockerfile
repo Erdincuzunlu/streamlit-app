@@ -17,6 +17,9 @@ RUN pip install --no-cache-dir -r /app/requirements.txt
 # Çalışma dizinini ayarlayın
 WORKDIR /app
 
+# Model dosyasını kopyalayın
+COPY voting_model.pkl /app/voting_model.pkl
+
 # Veritabanı dosyasını kopyalayın
 COPY analysis_results.db /app/analysis_results.db
 
