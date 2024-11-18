@@ -1,0 +1,7 @@
+streamlit
+librosa
+numpy
+scipy
+joblib
+sqlalchemy
+lightgbm
