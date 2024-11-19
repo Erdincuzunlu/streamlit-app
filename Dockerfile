@@ -9,15 +9,15 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libsndfile1 \
     && apt-get clean
 
-# Çalışma dizinini ayarlayın
-WORKDIR /app
-
 # Python bağımlılıklarını yüklemek için pip kullanıyoruz
 COPY requirements.txt /app/requirements.txt
 RUN pip install --no-cache-dir -r /app/requirements.txt
 
+# Çalışma dizinini ayarlayın
+WORKDIR /app
+
 # Model dosyasını kopyalayın
-COPY voting_model.pkl /app/voting_model.pkl
+COPY ANN.pkl /app/ANN.pkl
 
 # Veritabanı dosyasını kopyalayın
 COPY analysis_results.db /app/analysis_results.db
@@ -27,5 +27,3 @@ COPY . /app
 
 # Uygulamayı başlatmak için komut
 CMD ["streamlit", "run", "app.py", "--server.port=8501", "--server.address=0.0.0.0"]
-
-
