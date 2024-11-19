@@ -46,9 +46,9 @@ with st.sidebar:
     st.write("Uygulama Hakkında:")
     st.write("Bu uygulama, ses dosyalarından kekemelik analizi yapmaktadır.")
 
-# 2. Model ve Veritabanı Yükleme
-# Model yükleme
-model_path = "voting_model.pkl"
+
+# Model dosyasını yükleme
+model_path = "ANN.pkl"
 rf_model = joblib.load(model_path)
 
 # Veritabanı bağlantısı ve tablo oluşturma
