@@ -8,6 +8,16 @@ from datetime import datetime
 import pandas as pd
 
 
+
+
+# 1. Tema ve Stil Ayarları
+st.set_page_config(
+    page_title="Kekemelik Tespit ve Analiz",
+    page_icon="🎤",
+    layout="wide",
+    initial_sidebar_state="expanded",
+)
+
 # CSS ile arka plan resmi ekleme
 page_bg_img = '''
 <style>
@@ -22,14 +32,6 @@ body {
 
 # CSS'i Streamlit uygulamasına ekleme
 st.markdown(page_bg_img, unsafe_allow_html=True)
-
-# 1. Tema ve Stil Ayarları
-st.set_page_config(
-    page_title="Kekemelik Tespit ve Analiz",
-    page_icon="🎤",
-    layout="wide",
-    initial_sidebar_state="expanded",
-)
 
 st.markdown(
     "<h1 style='text-align: center; color: #4CAF50;'>Kekemelik Tespit ve Analiz Kaydı</h1>",
