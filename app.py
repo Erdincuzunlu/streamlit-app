@@ -183,29 +183,30 @@ if results:
 else:
     st.write("Henüz bir kayıt bulunmamaktadır.")
 
+
 # 8. Mikrofon ile Ses Kaydı Alma
-def record_audio():
-    recognizer = sr.Recognizer()
-    microphone = sr.Microphone()
-
-    with microphone as source:
-        st.write("Lütfen konuşmaya başlayın...")
-        recognizer.adjust_for_ambient_noise(source)
-        audio = recognizer.listen(source)
-
-    try:
-        st.write("Konuşma algılandı, şimdi metne dönüştürülüyor...")
-        text = recognizer.recognize_google(audio, language='tr-TR')  # Türkçe dil desteği
-        return text
-    except sr.UnknownValueError:
-        st.write("Ses tanınamadı. Lütfen tekrar deneyin.")
-    except sr.RequestError:
-        st.write("Google Speech API servisine ulaşılamadı.")
-    return None
+# def record_audio():
+#     recognizer = sr.Recognizer()
+#     microphone = sr.Microphone()
+#
+#     with microphone as source:
+#         st.write("Lütfen konuşmaya başlayın...")
+#         recognizer.adjust_for_ambient_noise(source)
+#         audio = recognizer.listen(source)
+#
+#     try:
+#         st.write("Konuşma algılandı, şimdi metne dönüştürülüyor...")
+#         text = recognizer.recognize_google(audio, language='tr-TR')  # Türkçe dil desteği
+#         return text
+#     except sr.UnknownValueError:
+#         st.write("Ses tanınamadı. Lütfen tekrar deneyin.")
+#     except sr.RequestError:
+#         st.write("Google Speech API servisine ulaşılamadı.")
+#     return None
 
 # Sesle konuşma özelliği
-if st.button("Sesle Konuşun"):
-    result = record_audio()
-    if result:
-        st.write("Metne dönüştürülen konuşma:")
-        st.write(result)
+# if st.button("Sesle Konuşun"):
+#     result = record_audio()
+#     if result:
+#         st.write("Metne dönüştürülen konuşma:")
+#         st.write(result)
