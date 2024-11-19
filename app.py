@@ -8,7 +8,7 @@ from datetime import datetime
 # Model ve veritabanı yükleme
 
 
-model_path = "/app/voting_model.pkl"
+model_path = "voting_model.pkl"
 rf_model = joblib.load(model_path)
 
 # SQLite veritabanı bağlantısı
