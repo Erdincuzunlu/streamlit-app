@@ -35,6 +35,51 @@ st.markdown(
     unsafe_allow_html=True
 )
 
+# Fonksiyonlar
+def stuttering_data_prep(df):
+    df.rename(columns={"stutering": "stuttering"}, inplace=True)
+
+    # MFCC
+    mfcc_mean_columns = [col for col in df.columns if col.startswith("mfcc_") & col.endswith("mean")]
+    df["mfcc_mean_sum"] = df[mfcc_mean_columns].sum(axis=1)
+
+    mfcc_std_columns = [col for col in df.columns if col.startswith("mfcc_") & col.endswith("std")]
+    df["mfcc_std_sum"] = df[mfcc_std_columns].sum(axis=1)
+
+    mfcc_columns = [col for col in df.columns if col.startswith("mfcc_") & col.endswith(("_mean", "_std"))]
+    df["mfcc_sum"] = df[mfcc_columns].sum(axis=1)
+
+    # Chroma
+    chroma_mean_columns = [col for col in df.columns if col.startswith("chroma_") & col.endswith("mean")]
+    df["chroma_mean_sum"] = df[chroma_mean_columns].sum(axis=1)
+
+    chroma_std_columns = [col for col in df.columns if col.startswith("chroma_") & col.endswith("std")]
+    df["chroma_std_sum"] = df[chroma_std_columns].sum(axis=1)
+
+    df["rms_zcr_mean"] = (df["rms_mean"] + df["zcr_mean"])/2
+
+    df["sc_sr_mean"] = (df["spectral_centroid_mean"] + df["spectral_rolloff_mean"])/2
+
+    df["rms_std*sc_std_"] = df["rms_std"] * df["spectral_centroid_std"]
+
+    df["tempo_+_zcr"] = df["tempo"] + df["zcr_mean"]
+
+    df["mfcc_*_rms_mean"] = (df["mfcc_mean_sum"] * df["rms_mean"])/13
+
+    df["chroma+rolloff"] = df[chroma_mean_columns].sum(axis=1) + df["spectral_rolloff_mean"]
+
+    df["tempo_*_zcr"] = df["tempo"] + df["rms_mean"]
+
+    df["sc_sr_chroma_mean"] = df["spectral_centroid_mean"] + df["spectral_rolloff_mean"] + df["chroma_mean_sum"]
+
+    # Log Transformation
+    log_cols = ["mfcc_1_std", "mfcc_3_std", "mfcc_5_std", "mfcc_7_std", "mfcc_10_std", "rms_mean", "rms_std", "zcr_mean", "zcr_std", "spectral_centroid_mean", "spectral_rolloff_mean", "spectral_centroid_std", "spectral_rolloff_std", "tempo", "zcr_tempo_ratio", "rms_tempo_ratio", "rms_energy_fluctuation" ]
+
+    df[log_cols] = np.log1p(df[log_cols])
+
+    return df
+
+
 # Sidebar
 with st.sidebar:
     st.header("Navigasyon")
@@ -131,6 +176,7 @@ if uploaded_file is not None:
             continue  # Eksik segmenti atla
 
         features = extract_features(segment, sr)
+        features = stuttering_data_prep(features)
         features = features.reshape(1, -1)
         prediction = rf_model.predict(features)[0]
         results.append(prediction)
