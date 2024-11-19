@@ -96,20 +96,20 @@ surname = st.text_input("Soyad:")
 date = st.date_input("Tarih:", datetime.now().date())
 
 # 5. Ortak Metin
-st.subheader("Okumanız Gereken Metin")
-st.write("Lütfen aşağıdaki metni sesli olarak okuyun:\n\n")
-st.markdown(
-    "<div style='background-color:#FFFFFF; padding:10px; border-radius:5px;'>"
-    "<h3>Metin:</h3>"
-    "<p style='color: #000000; font-style: italic;'>"
-    "'Bugün dünyada her geçen gün gelişen teknolojiler, insanların yaşamını büyük ölçüde değiştiriyor. "
-    "Özellikle yapay zeka ve makine öğrenimi gibi alanlar, çeşitli endüstrilerde devrim yaratmakta. "
-    "Bu teknolojiler, insanların daha verimli çalışmasına, çeşitli görevleri daha hızlı ve doğru bir şekilde tamamlamasına olanak tanımaktadır. "
-    "Ancak, teknolojinin hızlı gelişimi, bazı toplumsal zorlukları da beraberinde getirebilir. "
-    "Bu nedenle, teknolojiye dair hem fırsatlar hem de riskler dikkatle değerlendirilmelidir.'</p>"
-    "</div>",
-    unsafe_allow_html=True
-)
+#st.subheader("Okumanız Gereken Metin")
+#st.write("Lütfen aşağıdaki metni sesli olarak okuyun:\n\n")
+#st.markdown(
+ #   "<div style='background-color:#FFFFFF; padding:10px; border-radius:5px;'>"
+ #   "<h3>Metin:</h3>"
+ #   "<p style='color: #000000; font-style: italic;'>"
+  #  "'Bugün dünyada her geçen gün gelişen teknolojiler, insanların yaşamını büyük ölçüde değiştiriyor. "
+  #  "Özellikle yapay zeka ve makine öğrenimi gibi alanlar, çeşitli endüstrilerde devrim yaratmakta. "
+  #  "Bu teknolojiler, insanların daha verimli çalışmasına, çeşitli görevleri daha hızlı ve doğru bir şekilde tamamlamasına olanak tanımaktadır. "
+  #  "Ancak, teknolojinin hızlı gelişimi, bazı toplumsal zorlukları da beraberinde getirebilir. "
+  #  "Bu nedenle, teknolojiye dair hem fırsatlar hem de riskler dikkatle değerlendirilmelidir.'</p>"
+  #  "</div>",
+ #   unsafe_allow_html=True
+#)
 
 # 6. Ses Yükleme ve Analiz
 uploaded_file = st.file_uploader("Ses dosyasını yükleyin", type=["wav", "mp3"])
