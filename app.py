@@ -22,7 +22,7 @@ st.set_page_config(
 page_bg_img = '''
 <style>
 body {
-    background-image: url("background.jpg");
+    background-image: url("https://via.placeholder.com/800x600");
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
