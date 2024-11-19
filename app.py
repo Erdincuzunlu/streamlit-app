@@ -1,4 +1,3 @@
-# Gerekli kütüphanelerin import edilmesi
 import streamlit as st
 import librosa
 import numpy as np
@@ -6,9 +5,7 @@ import joblib
 from sqlalchemy import create_engine, Table, MetaData, Column, Integer, String, Date, insert
 from datetime import datetime
 import pandas as pd
-
-
-
+import speech_recognition as sr
 
 # 1. Tema ve Stil Ayarları
 st.set_page_config(
@@ -45,7 +42,6 @@ with st.sidebar:
     st.markdown("---")
     st.write("Uygulama Hakkında:")
     st.write("Bu uygulama, ses dosyalarından kekemelik analizi yapmaktadır.")
-
 
 # Model dosyasını yükleme
 model_path = "ANN.pkl"
@@ -97,7 +93,18 @@ name = st.text_input("Ad:")
 surname = st.text_input("Soyad:")
 date = st.date_input("Tarih:", datetime.now().date())
 
-# 5. Ses Yükleme ve Analiz
+# 5. Ortak Metin
+st.subheader("Okumanız Gereken Metin")
+st.write("Lütfen aşağıdaki metni sesli olarak okuyun:\n\n")
+st.markdown(
+    "<div style='background-color:#FFEB3B; padding:10px; border-radius:5px;'>"
+    "<h3>Metin:</h3>"
+    "<p>'Bu bir test metnidir. Lütfen dikkatli bir şekilde okuyun ve ardından konuşmaya başlayın.'</p>"
+    "</div>",
+    unsafe_allow_html=True
+)
+
+# 6. Ses Yükleme ve Analiz
 uploaded_file = st.file_uploader("Ses dosyasını yükleyin", type=["wav", "mp3"])
 if uploaded_file is not None:
     # Ses dosyasını işleme
@@ -158,7 +165,7 @@ if uploaded_file is not None:
             connection.execute(insert_stmt)
             st.success("Analiz sonuçları başarıyla kaydedildi!")
 
-# 6. Tüm Kayıtları Görüntüleme
+# 7. Tüm Kayıtları Görüntüleme
 st.header("Tüm Kayıtlar")
 with engine.connect() as connection:
     results = connection.execute(results_table.select()).fetchall()
@@ -168,3 +175,30 @@ if results:
     st.dataframe(results)
 else:
     st.write("Henüz bir kayıt bulunmamaktadır.")
+
+# 8. Mikrofon ile Ses Kaydı Alma
+def record_audio():
+    recognizer = sr.Recognizer()
+    microphone = sr.Microphone()
+
+    with microphone as source:
+        st.write("Lütfen konuşmaya başlayın...")
+        recognizer.adjust_for_ambient_noise(source)
+        audio = recognizer.listen(source)
+
+    try:
+        st.write("Konuşma algılandı, şimdi metne dönüştürülüyor...")
+        text = recognizer.recognize_google(audio, language='tr-TR')  # Türkçe dil desteği
+        return text
+    except sr.UnknownValueError:
+        st.write("Ses tanınamadı. Lütfen tekrar deneyin.")
+    except sr.RequestError:
+        st.write("Google Speech API servisine ulaşılamadı.")
+    return None
+
+# Sesle konuşma özelliği
+if st.button("Sesle Konuşun"):
+    result = record_audio()
+    if result:
+        st.write("Metne dönüştürülen konuşma:")
+        st.write(result)
