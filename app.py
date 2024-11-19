@@ -99,7 +99,11 @@ st.write("Lütfen aşağıdaki metni sesli olarak okuyun:\n\n")
 st.markdown(
     "<div style='background-color:#FFEB3B; padding:10px; border-radius:5px;'>"
     "<h3>Metin:</h3>"
-    "<p>'Bu bir test metnidir. Lütfen dikkatli bir şekilde okuyun ve ardından konuşmaya başlayın.'</p>"
+    "<p>'Bugün dünyada her geçen gün gelişen teknolojiler, insanların yaşamını büyük ölçüde değiştiriyor. "
+    "Özellikle yapay zeka ve makine öğrenimi gibi alanlar, çeşitli endüstrilerde devrim yaratmakta. "
+    "Bu teknolojiler, insanların daha verimli çalışmasına, çeşitli görevleri daha hızlı ve doğru bir şekilde tamamlamasına olanak tanımaktadır. "
+    "Ancak, teknolojinin hızlı gelişimi, bazı toplumsal zorlukları da beraberinde getirebilir. "
+    "Bu nedenle, teknolojiye dair hem fırsatlar hem de riskler dikkatle değerlendirilmelidir.'</p>"
     "</div>",
     unsafe_allow_html=True
 )
