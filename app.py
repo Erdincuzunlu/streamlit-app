@@ -37,7 +37,7 @@ st.markdown(
 
 # Fonksiyonlar
 def stuttering_data_prep(df):
-    df.rename(columns={"stutering": "stuttering"}, inplace=True)
+
 
     # MFCC
     mfcc_mean_columns = [col for col in df.columns if col.startswith("mfcc_") & col.endswith("mean")]
