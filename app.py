@@ -7,6 +7,22 @@ from sqlalchemy import create_engine, Table, MetaData, Column, Integer, String, 
 from datetime import datetime
 import pandas as pd
 
+
+# CSS ile arka plan resmi ekleme
+page_bg_img = '''
+<style>
+body {
+    background-image: url("background.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+</style>
+'''
+
+# CSS'i Streamlit uygulamasına ekleme
+st.markdown(page_bg_img, unsafe_allow_html=True)
+
 # 1. Tema ve Stil Ayarları
 st.set_page_config(
     page_title="Kekemelik Tespit ve Analiz",
